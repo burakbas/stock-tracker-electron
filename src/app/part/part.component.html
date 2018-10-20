@@ -1,0 +1,67 @@
+<section>
+  <h1>Add a Part</h1>
+  <hr>
+  <form #partForm="ngForm" (ngSubmit)="onSubmit(partForm)">
+    <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="partService.selectedPart.$key">
+    <div class="form_group row">
+      <div class="col-25">
+        <label for="name">Name: </label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="partService.selectedPart.name" required>
+      </div>
+    </div>
+    <div class="form_group row">
+      <div class="col-25">
+        <label for="stock">Stock: </label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="stock" name="stock" #stock="ngModel" [(ngModel)]="partService.selectedPart.stock" required>
+      </div>
+    </div>
+    <div class="form_group row">
+      <div class="col-25">
+        <label for="critical">Critical Stock: </label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="critical" name="critical" #critical="ngModel" [(ngModel)]="partService.selectedPart.critical" required>
+      </div>
+    </div>
+    <div class="form_group">
+      <button type="submit" [disabled]="!partForm.valid">Save</button>
+      <button type="button" (click)="resetForm(partForm)">Reset</button>
+    </div>
+  </form>
+
+  <br><br>
+
+  <h2>Parts</h2>
+  <hr>
+  <div class="table-scroll-xl">
+    <table>
+      <thead>
+      <tr>
+        <th width="55%">Name</th>
+        <th width="15%">Stock</th>
+        <th width="15%">Critical Stock</th>
+        <th width="15%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let part of partList">
+        <td><p>{{part.name}}</p></td>
+        <td>{{part.stock}}</td>
+        <td>{{part.critical}}</td>
+        <td>
+          <span *ngIf="part.stock <= part.critical">❌❗</span>
+          <div class="control">
+            <img class="update_item" src="assets/update.svg" (click)="onUpdate(part)">
+            <img class="remove_item" src="assets/remove.svg" (click)="onRemove(part.$key)">
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+

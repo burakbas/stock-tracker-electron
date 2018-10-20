@@ -1,0 +1,61 @@
+<section>
+  <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
+
+  <h2>Select a Product</h2>
+  <hr>
+  <form #homeForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form_group row">
+      <div class="col-25">
+        <label for="name">Name: </label>
+      </div>
+      <div class="col-75">
+        <select id="name" name="name" [(ngModel)]="selectedProductIndex" required>
+          <option [value]="null" selected>Select</option>
+          <option *ngFor="let product of productList; let i=index" [ngValue]="i">{{product.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form_group row">
+      <div class="col-25">
+        <label for="amunt">Amount: </label>
+      </div>
+      <div class="col-75">
+        <div class="col-50"><input type="number" id="amunt" name="amount" [(ngModel)]="productAmount" required style="width: 190px"></div>
+        <div class="col-50"><button type="submit" [disabled]="!homeForm.valid">Decrease Stock</button></div>
+      </div>
+    </div>
+  </form>
+
+  <br><br>
+
+  <h2>Part Stocks</h2>
+  <hr>
+  <div class="table-scroll-xl">
+    <table>
+      <thead>
+      <tr>
+        <th width="55%">Name</th>
+        <th width="15%">Stock</th>
+        <th width="15%">Critical Stock</th>
+        <th width="15%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let part of partList">
+        <td><p>{{part.name}}</p></td>
+        <td>{{part.stock}}</td>
+        <td>{{part.critical}}</td>
+        <td>
+          <div *ngIf="part.stock <= part.critical">
+            <span>❌❗</span>
+            <div class="control">
+              <img class="update_item" src="assets/plus.svg" style="padding-top: 5px" routerLink="/part">
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+

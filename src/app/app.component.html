@@ -1,0 +1,13 @@
+<ul>
+  <li><h3 class="logo">🔧 Stock Tracker </h3></li>
+  <li><a routerLink="/home" [ngClass]="{'active': active('/home')}">Home</a></li>
+  <li><a routerLink="/part" [ngClass]="{'active': active('/part')}">Add a Part</a></li>
+  <li><a routerLink="/product" [ngClass]="{'active': active('/product')}">Add a Product</a></li>
+  <li style="float: right" (click)="logout()" *ngIf="authService.user | async"><a>Logout</a></li>
+</ul>
+
+<router-outlet></router-outlet>
+
+<footer>
+  <p>Burak Bas ✌✌ 2018</p>
+</footer>

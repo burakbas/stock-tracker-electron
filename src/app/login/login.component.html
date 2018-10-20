@@ -1,0 +1,38 @@
+<section style="height: 600px">
+  <h1>Signup/Login</h1>
+  <hr>
+  <form #partForm="ngForm" *ngIf="!(authService.user | async)">
+    <div class="form_group row">
+      <div class="col-25">
+        <label for="email">Email: </label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="email" name="email" [(ngModel)]="email" placeholder="Email" required>
+      </div>
+    </div>
+    <div class="form_group row">
+      <div class="col-25">
+        <label for="password">Password: </label>
+      </div>
+      <div class="col-75">
+        <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password">
+      </div>
+    </div>
+    <div class="form_group row">
+      <button type="button" (click)="signup()" [disabled]="!email || !password">
+        Signup
+      </button>
+      <button type="button" (click)="login()" [disabled]="!email || !password">
+        Login
+      </button>
+    </div>
+    <div class="form_group row">
+      <button class="loginBtn loginBtn--facebook" (click)="loginWithFacebook()">
+        Login with Facebook
+      </button>
+      <button class="loginBtn loginBtn--google" (click)="loginWithGoogle()">
+        Login with Google
+      </button>
+    </div>
+  </form>
+</section>
