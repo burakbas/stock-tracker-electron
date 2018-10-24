@@ -1,0 +1,40 @@
+{
+  "home": {
+    "welcome": "Hoş geldin",
+    "select-prod": "Ürün seç",
+    "name": "Adı",
+    "select": "Seç",
+    "amount": "Adet",
+    "decrease": "Stoktan Düş",
+    "stocks": "Parça Stoğu",
+    "stock": "Stok",
+    "critical": "Kritik Stok",
+    "search": "Ara"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "part": "Parça Ekle",
+    "prod": "Ürün Ekle",
+    "logout": "Çıkış Yap"
+  },
+  "login": {
+    "title": "Giriş yap / Kayıt ol",
+    "password": "Şifre",
+    "signup": "Kayıt Ol",
+    "login": "Giriş Yap",
+    "facebook": "Facebook ile giriş yap",
+    "google": "Google ile giriş yap"
+  },
+  "part": {
+    "title": "Parça Ekle",
+    "save": "Kaydet",
+    "reset": "Reset"
+  },
+  "product": {
+    "title": "Ürün Ekle",
+    "name": "Parça Adı",
+    "amount": "Parça Adeti",
+    "parts": "Eklenmiş Parçalar",
+    "products":  "Ürünler"
+  }
+}

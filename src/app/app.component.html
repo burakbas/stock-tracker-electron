@@ -1,9 +1,15 @@
 <ul>
-  <li><h3 class="logo">🔧 Stock Tracker </h3></li>
-  <li><a routerLink="/home" [ngClass]="{'active': active('/home')}">Home</a></li>
-  <li><a routerLink="/part" [ngClass]="{'active': active('/part')}">Add a Part</a></li>
-  <li><a routerLink="/product" [ngClass]="{'active': active('/product')}">Add a Product</a></li>
-  <li style="float: right" (click)="logout()" *ngIf="authService.user | async"><a>Logout</a></li>
+  <li><a class="logo">🔧 Stock Tracker</a></li>
+  <li><a routerLink="/home" [ngClass]="{'active': active('/home')}">{{ 'nav.home' | translate }}</a></li>
+  <li><a routerLink="/part" [ngClass]="{'active': active('/part')}">{{ 'nav.part' | translate }}</a></li>
+  <li><a routerLink="/product" [ngClass]="{'active': active('/product')}">{{ 'nav.prod' | translate }}</a></li>
+  <li class="float-right" *ngIf="translate.getDefaultLang() == 'en'" (click)="switchLanguage('tr')">
+    <img src="assets/turkey.svg" alt="tr" class="lang">
+  </li>
+  <li class="float-right" *ngIf="translate.getDefaultLang() == 'tr'" (click)="switchLanguage('en')">
+    <img src="assets/united-states.svg" alt="us" class="lang">
+  </li>
+  <li class="float-right" (click)="logout()" *ngIf="authService.user | async"><a>{{ 'nav.logout' | translate }}</a></li>
 </ul>
 
 <router-outlet></router-outlet>

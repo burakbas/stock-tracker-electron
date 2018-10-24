@@ -1,0 +1,40 @@
+{
+  "home": {
+    "welcome": "Welcome",
+    "select-prod": "Select a Product",
+    "name": "Name",
+    "select": "Select",
+    "amount": "Amount",
+    "decrease": "Decrease Stock",
+    "stocks": "Part Stock",
+    "stock": "Stock",
+    "critical": "Critical Stock",
+    "search": "Search"
+  },
+  "nav": {
+    "home": "Home",
+    "part": "Add a Part",
+    "prod": "Add a Product",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Signup / Login",
+    "password": "Password",
+    "signup": "Sign Up",
+    "login": "Login",
+    "facebook": "Login with Facebook",
+    "google": "Login with Google"
+  },
+  "part": {
+    "title": "Add a Part",
+    "save": "Save",
+    "reset": "Reset"
+  },
+  "product": {
+    "title": "Add a Product",
+    "name": "Part Name",
+    "amount": "Part Amount",
+    "parts": "Added Parts",
+    "products": "Products"
+  }
+}

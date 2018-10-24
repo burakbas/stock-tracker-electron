@@ -5,6 +5,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -18,6 +19,8 @@ import { ProductService } from './common/product.service';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './common/auth.service';
 import { AuthGuardService } from './common/auth-guard.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
@@ -25,6 +28,10 @@ const appRoutes: Routes = [
   {path: 'part', component: PartComponent, canActivate: [AuthGuardService]},
   {path: 'product', component: ProductComponent, canActivate: [AuthGuardService]}
 ];
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -42,7 +49,15 @@ const appRoutes: Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     PartService,

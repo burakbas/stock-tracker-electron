@@ -1,67 +1,103 @@
 <section>
-  <h1>Add a Product</h1>
-  <hr>
-  <div class="container-left">
-    <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
-      <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="productService.selectedProduct.$key">
-      <div class="form_group row">
-        <div class="col-25">
-          <label for="name">Name: </label>
-        </div>
-        <div class="col-75">
-          <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="productService.selectedProduct.name" required>
-        </div>
-      </div>
-      <div class="form_group row">
-        <div class="col-25">
-          <label for="parts">Part Name: </label>
-        </div>
-        <div class="col-75">
-          <select id="parts" name="part" [(ngModel)]="partToAdd" required>
-            <option [value]="null" selected>Select</option>
-            <option *ngFor="let part of partList" [ngValue]="part.name">{{part.name}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="form_group row">
-        <div class="col-25">
-          <label for="amount">Part Amount: </label>
-        </div>
-        <div class="col-75">
-          <div class="col-50">
-            <input type="number" id="amount" name="amount" #name="ngModel" [(ngModel)]="amountToAdd" required style="width: 190px">
+  <div>
+    <h1>{{ 'product.title' | translate }}</h1>
+    <hr>
+    <div class="container-left">
+      <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+        <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="productService.selectedProduct.$key">
+        <div class="form_group row">
+          <div class="col-25">
+            <label for="name">{{ 'home.name' | translate }}: </label>
           </div>
-          <div class="col-50">
-            <button type="button" [disabled]="!productForm.valid"
-                    (click)="addPart()" style="background-color: #34495e">Add Part</button>
+          <div class="col-75">
+            <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="productService.selectedProduct.name" required>
           </div>
         </div>
+        <div class="form_group row">
+          <div class="col-25">
+            <label for="parts">{{ 'product.name' | translate }}: </label>
+          </div>
+          <div class="col-75">
+            <select id="parts" name="part" [(ngModel)]="partToAdd" required>
+              <option [value]="null" selected>{{ 'home.select' | translate }}</option>
+              <option *ngFor="let part of partList" [ngValue]="part.name">{{part.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form_group row">
+          <div class="col-25">
+            <label for="amount">{{ 'product.amount' | translate }}: </label>
+          </div>
+          <div class="col-75">
+            <div class="col-50">
+              <input type="number" id="amount" name="amount" #name="ngModel"
+                     oninput="validity.valid||(value='');" [(ngModel)]="amountToAdd" required style="width: 190px">
+            </div>
+            <div class="col-50">
+              <button type="button" [disabled]="!productForm.valid"
+                      (click)="addPart()" style="background-color: #34495e">{{ 'nav.part' | translate }}</button>
+            </div>
+          </div>
+        </div>
+        <div class="form_group">
+          <button type="submit" [disabled]="!productForm.valid && productService.selectedProduct.parts?.length==0">
+            {{ 'part.save' | translate }}
+          </button>
+          <button type="button" (click)="resetForm(productForm)">{{ 'part.reset' | translate }}</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-right">
+      <h3>{{ 'product.parts' | translate }}</h3>
+      <div class="table-scroll-sm">
+        <table>
+          <thead>
+          <tr>
+            <th width="70%">{{ 'home.name' | translate }}</th>
+            <th width="15%">{{ 'home.amount' | translate }}</th>
+            <th width="15%"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let part of productService.selectedProduct.parts; let i=index">
+            <td><p>{{part.name}}</p></td>
+            <td>{{part.amount}}</td>
+            <td>
+              <div class="control">
+                <img class="remove_item" src="assets/remove.svg" (click)="removePart(i)">
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="form_group">
-        <button type="submit" [disabled]="!productForm.valid && productService.selectedProduct.parts?.length==0">Save</button>
-        <button type="button" (click)="resetForm(productForm)">Reset</button>
-      </div>
-    </form>
+    </div>
   </div>
 
-  <div class="container-right">
-    <h3>Added Parts</h3>
-    <div class="table-scroll-sm">
-      <table>
+  <br><br>
+
+  <div>
+    <h2>{{ 'product.products' | translate }}</h2>
+    <hr>
+    <input type="text" id="myInput" (keyup)="search()" placeholder="{{ 'home.search' | translate }}">
+    <div class="table-scroll-xl">
+      <table id="myTable">
         <thead>
         <tr>
-          <th width="70%">Name</th>
-          <th width="15%">Amount</th>
-          <th width="15%"></th>
+          <th width="40%">{{ 'home.name' | translate }}</th>
+          <th width="50%">{{ 'product.parts' | translate }}</th>
+          <th width="10%"></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let part of productService.selectedProduct.parts; let i=index">
-          <td><p>{{part.name}}</p></td>
-          <td>{{part.amount}}</td>
+        <tr *ngFor="let product of productList">
+          <td><p>{{product.name}}</p></td>
+          <td><p *ngFor="let part of product.parts">{{part.name}} - <span style="font-weight: bold">{{part.amount}}</span></p></td>
           <td>
             <div class="control">
-              <img class="remove_item" src="assets/remove.svg" (click)="removePart(i)">
+              <img class="update_item" src="assets/update.svg" (click)="onUpdate(product)">
+              <img class="remove_item" src="assets/remove.svg" (click)="onRemove(product.$key)">
             </div>
           </td>
         </tr>
@@ -70,32 +106,3 @@
     </div>
   </div>
 </section>
-
-<section>
-  <h2>Products</h2>
-  <hr>
-  <div class="table-scroll-xl">
-    <table>
-      <thead>
-      <tr>
-        <th width="40%">Name</th>
-        <th width="50%">Parts</th>
-        <th width="10%"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let product of productList">
-        <td><p>{{product.name}}</p></td>
-        <td><p *ngFor="let part of product.parts">{{part.name}} - <span style="font-weight: bold">{{part.amount}}</span></p></td>
-        <td>
-          <div class="control">
-            <img class="update_item" src="assets/update.svg" (click)="onUpdate(product)">
-            <img class="remove_item" src="assets/remove.svg" (click)="onRemove(product.$key)">
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-

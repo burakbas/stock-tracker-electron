@@ -1,5 +1,5 @@
 <section style="height: 600px">
-  <h1>Signup/Login</h1>
+  <h1>{{ 'login.title' | translate }}</h1>
   <hr>
   <form #partForm="ngForm" *ngIf="!(authService.user | async)">
     <div class="form_group row">
@@ -7,31 +7,31 @@
         <label for="email">Email: </label>
       </div>
       <div class="col-75">
-        <input type="text" id="email" name="email" [(ngModel)]="email" placeholder="Email" required>
+        <input type="text" id="email" name="email" [(ngModel)]="email" required>
       </div>
     </div>
     <div class="form_group row">
       <div class="col-25">
-        <label for="password">Password: </label>
+        <label for="password">{{ 'login.password' | translate }}: </label>
       </div>
       <div class="col-75">
-        <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password">
+        <input type="password" id="password" name="password" [(ngModel)]="password">
       </div>
     </div>
     <div class="form_group row">
       <button type="button" (click)="signup()" [disabled]="!email || !password">
-        Signup
+        {{ 'login.signup' | translate }}
       </button>
       <button type="button" (click)="login()" [disabled]="!email || !password">
-        Login
+        {{ 'login.login' | translate }}
       </button>
     </div>
     <div class="form_group row">
       <button class="loginBtn loginBtn--facebook" (click)="loginWithFacebook()">
-        Login with Facebook
+        {{ 'login.facebook' | translate }}
       </button>
       <button class="loginBtn loginBtn--google" (click)="loginWithGoogle()">
-        Login with Google
+        {{ 'login.google' | translate }}
       </button>
     </div>
   </form>

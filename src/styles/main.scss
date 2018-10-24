@@ -5,31 +5,35 @@
 @import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #ecf0f1;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ecf0f1;
 
-    app-root {
+  app-root {
 
-        > i {
-            @include transform(-50%, -50%);
-            color: $main_color;
-            font-size: 340%;
-            width: auto;
-            position: absolute;
-            top: 47%;
-            left: 47%;
-        }
+    > i {
+      @include transform(-50%, -50%);
+      color: $main_color;
+      font-size: 340%;
+      width: auto;
+      position: absolute;
+      top: 47%;
+      left: 47%;
     }
+  }
 }
 
 @import 'mobile';
 
-.logo{
-  background-color: #2c3e50;
-  padding: 0.2em;
+.logo {
+  padding: 9px 20px;
   text-align: center;
-  font-size: 27px;
+  font-size: 20px;
   color: white;
+}
+
+.logo:focus, .logo:hover {
+  text-decoration: none;
+  background-color: transparent !important;
 }
 
 footer {
@@ -68,8 +72,8 @@ li {
 }
 
 section {
-  height: 100%;
   width: 95%;
+  height: 750px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -177,7 +181,8 @@ th, td {
   }
 }
 
-tr:nth-child(even){background-color: #e3e9ed
+tr:nth-child(even) {
+  background-color: #e3e9ed
 }
 
 th {
@@ -243,6 +248,7 @@ th {
   font-size: 13px;
   color: #FFF;
 }
+
 .loginBtn:before {
   content: "";
   box-sizing: border-box;
@@ -252,13 +258,14 @@ th {
   width: 34px;
   height: 100%;
 }
+
 .loginBtn:focus {
   outline: none;
 }
-.loginBtn:active {
-  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
-}
 
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+}
 
 /* Facebook */
 .loginBtn--facebook {
@@ -267,27 +274,53 @@ th {
   /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
   text-shadow: 0 -1px 0 #354C8C;
 }
+
 .loginBtn--facebook:before {
   border-right: #364e92 1px solid;
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
 }
+
 .loginBtn--facebook:hover,
 .loginBtn--facebook:focus {
   background-color: #5B7BD5;
   background-image: linear-gradient(#5B7BD5, #4864B1);
 }
 
-
 /* Google */
 .loginBtn--google {
   /*font-family: "Roboto", Roboto, arial, sans-serif;*/
   background: #DD4B39;
 }
+
 .loginBtn--google:before {
   border-right: #BB3F30 1px solid;
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
 }
+
 .loginBtn--google:hover,
 .loginBtn--google:focus {
   background: #E74B37;
+}
+
+#myInput {
+  background-image: url('/assets/search.svg');
+  background-size: 20px;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  width: 500px;
+}
+
+.lang {
+  width: 20px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.float-right {
+  float: right;
 }

@@ -1,42 +1,46 @@
 <section>
-  <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
+  <h1 *ngIf="authService.user | async">{{ 'home.welcome' | translate }} {{ (authService.user | async)?.email }}!</h1>
 
-  <h2>Select a Product</h2>
+  <h2>{{ 'home.select-prod' | translate }}</h2>
   <hr>
   <form #homeForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="form_group row">
       <div class="col-25">
-        <label for="name">Name: </label>
+        <label for="name">{{ 'home.name' | translate }}: </label>
       </div>
       <div class="col-75">
         <select id="name" name="name" [(ngModel)]="selectedProductIndex" required>
-          <option [value]="null" selected>Select</option>
+          <option [value]="null" selected>{{ 'home.select' | translate }}</option>
           <option *ngFor="let product of productList; let i=index" [ngValue]="i">{{product.name}}</option>
         </select>
       </div>
     </div>
     <div class="form_group row">
       <div class="col-25">
-        <label for="amunt">Amount: </label>
+        <label for="amount">{{ 'home.amount' | translate }}: </label>
       </div>
       <div class="col-75">
-        <div class="col-50"><input type="number" id="amunt" name="amount" [(ngModel)]="productAmount" required style="width: 190px"></div>
-        <div class="col-50"><button type="submit" [disabled]="!homeForm.valid">Decrease Stock</button></div>
+        <div class="col-50">
+          <input type="number" id="amount" name="amount" min="0" required
+                 oninput="validity.valid||(value='');" [(ngModel)]="productAmount" style="width: 190px">
+        </div>
+        <div class="col-50"><button type="submit" [disabled]="!homeForm.valid">{{ 'home.decrease' | translate }}</button></div>
       </div>
     </div>
   </form>
 
   <br><br>
 
-  <h2>Part Stocks</h2>
+  <h2>{{ 'home.stocks' | translate }}</h2>
   <hr>
+  <input type="text" id="myInput" (keyup)="search()" placeholder="{{ 'home.search' | translate }}">
   <div class="table-scroll-xl">
-    <table>
+    <table id="myTable">
       <thead>
       <tr>
-        <th width="55%">Name</th>
-        <th width="15%">Stock</th>
-        <th width="15%">Critical Stock</th>
+        <th width="55%">{{ 'home.name' | translate }}</th>
+        <th width="15%">{{ 'home.stock' | translate }}</th>
+        <th width="15%">{{ 'home.critical' | translate }}</th>
         <th width="15%"></th>
       </tr>
       </thead>

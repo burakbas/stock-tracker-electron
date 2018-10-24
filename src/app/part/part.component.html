@@ -1,11 +1,11 @@
 <section>
-  <h1>Add a Part</h1>
+  <h1>{{ 'part.title' | translate }}</h1>
   <hr>
   <form #partForm="ngForm" (ngSubmit)="onSubmit(partForm)">
     <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="partService.selectedPart.$key">
     <div class="form_group row">
       <div class="col-25">
-        <label for="name">Name: </label>
+        <label for="name">{{ 'home.name' | translate }}: </label>
       </div>
       <div class="col-75">
         <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="partService.selectedPart.name" required>
@@ -13,37 +13,40 @@
     </div>
     <div class="form_group row">
       <div class="col-25">
-        <label for="stock">Stock: </label>
+        <label for="stock">{{ 'home.stock' | translate }}: </label>
       </div>
       <div class="col-75">
-        <input type="number" id="stock" name="stock" #stock="ngModel" [(ngModel)]="partService.selectedPart.stock" required>
+        <input type="number" id="stock" name="stock" #stock="ngModel"
+               oninput="validity.valid||(value='');" [(ngModel)]="partService.selectedPart.stock" required>
       </div>
     </div>
     <div class="form_group row">
       <div class="col-25">
-        <label for="critical">Critical Stock: </label>
+        <label for="critical">{{ 'home.critical' | translate }}: </label>
       </div>
       <div class="col-75">
-        <input type="number" id="critical" name="critical" #critical="ngModel" [(ngModel)]="partService.selectedPart.critical" required>
+        <input type="number" id="critical" name="critical" #critical="ngModel"
+               oninput="validity.valid||(value='');" [(ngModel)]="partService.selectedPart.critical" required>
       </div>
     </div>
     <div class="form_group">
-      <button type="submit" [disabled]="!partForm.valid">Save</button>
-      <button type="button" (click)="resetForm(partForm)">Reset</button>
+      <button type="submit" [disabled]="!partForm.valid">{{ 'part.save' | translate }}</button>
+      <button type="button" (click)="resetForm(partForm)">{{ 'part.reset' | translate }}</button>
     </div>
   </form>
 
   <br><br>
 
-  <h2>Parts</h2>
+  <h2>{{ 'home.stocks' | translate }}</h2>
   <hr>
+  <input type="text" id="myInput" (keyup)="search()" placeholder="{{ 'home.search' | translate }}">
   <div class="table-scroll-xl">
-    <table>
+    <table id="myTable">
       <thead>
       <tr>
-        <th width="55%">Name</th>
-        <th width="15%">Stock</th>
-        <th width="15%">Critical Stock</th>
+        <th width="55%">{{ 'home.name' | translate }}</th>
+        <th width="15%">{{ 'home.stock' | translate }}</th>
+        <th width="15%">{{ 'home.critical' | translate }}</th>
         <th width="15%"></th>
       </tr>
       </thead>
